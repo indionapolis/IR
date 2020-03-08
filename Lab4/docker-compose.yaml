@@ -1,0 +1,40 @@
+version: '3.4'
+
+
+services:
+  crawler:
+    depends_on:
+      - db
+    build:
+      dockerfile: crawler/Dockerfile
+      context: crawler
+    environment:
+      - DB_HOST=db
+      - DB_PORT=6379
+
+  app:
+    depends_on:
+      - db
+    build:
+      dockerfile: app/Dockerfile
+      context: app
+    environment:
+      - DB_HOST=db
+      - DB_PORT=6379
+
+  nginx:
+    depends_on:
+      - app
+    build:
+      dockerfile: Dockerfile
+      context: nginx/
+    ports:
+      - 80:80
+
+  db:
+    restart: always
+    image: redis:latest
+    volumes:
+      - ./db_data:/data
+    ports:
+      - 6380:6379
