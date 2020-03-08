@@ -9,4 +9,6 @@ RUN pip install soundex
 
 COPY . .
 
+RUN sh setup.sh
+
 CMD python main.py
