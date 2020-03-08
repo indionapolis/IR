@@ -6,8 +6,8 @@ services:
     depends_on:
       - db
     build:
-      dockerfile: crawler/Dockerfile
-      context: crawler
+      dockerfile: Dockerfile
+      context: ./crawler/
     environment:
       - DB_HOST=db
       - DB_PORT=6379
@@ -16,8 +16,8 @@ services:
     depends_on:
       - db
     build:
-      dockerfile: app/Dockerfile
-      context: app
+      dockerfile: Dockerfile
+      context: ./app/
     environment:
       - DB_HOST=db
       - DB_PORT=6379
@@ -27,7 +27,7 @@ services:
       - app
     build:
       dockerfile: Dockerfile
-      context: nginx/
+      context: ./nginx/
     ports:
       - 80:80
 
@@ -37,4 +37,4 @@ services:
     volumes:
       - ./db_data:/data
     ports:
-      - 6380:6379
+      - 6379:6379

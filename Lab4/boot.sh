@@ -1,1 +1,1 @@
-docker-compose up --scale app=3
+docker-compose up -d --scale app=3
