@@ -72,3 +72,5 @@ fabric.properties
 
 db_data/
 data/
+.DS_Store
+.idea/

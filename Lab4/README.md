@@ -10,4 +10,8 @@ In this lab you will continue working on your project. Here is the list of what 
 
 ## Report
 
-implemented using ```redis```, ```nginx```, ```flask``` and ```docker-compose``` 
+Implemented using ```redis```, ```nginx```, ```flask``` and ```docker-compose``` 
+
+## Quick start
+
+run ```sh boot.sh```
