@@ -4,22 +4,22 @@ version: '3.2'
 services:
   crawler:
     depends_on:
-      - db
+      - redis-master
     build:
       dockerfile: Dockerfile
       context: ./crawler/
     environment:
-      - DB_HOST=db
+      - DB_HOST=redis-master
       - DB_PORT=6379
 
   app:
     depends_on:
-      - db
+      - redis-master
     build:
       dockerfile: Dockerfile
       context: ./app/
     environment:
-      - DB_HOST=db
+      - DB_HOST=redis-master
       - DB_PORT=6379
 
   nginx:
@@ -31,10 +31,12 @@ services:
     ports:
       - 80:80
 
-  db:
+  redis-master:
     restart: always
     image: redis:latest
     volumes:
       - ./db_data:/data
-    ports:
-      - 6379:6379
+
+  redis-slave:
+    image: redis:latest
+    command: redis-server --slaveof redis-master 6379
